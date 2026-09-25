@@ -20,3 +20,34 @@
   --color-primary-content: #102C37;
   --color-accent:#E0BD7B;
 }
+@font-face {
+  font-family: 'pop';
+  src: url('assets/fonts/Poppins/Poppins-Regular.ttf');
+  font-weight: 400;
+}
+
+@font-face {
+  font-family: 'pop';
+  src: url('assets/fonts/Poppins/Poppins-Medium.ttf');
+  font-weight: 500;
+}
+
+@font-face {
+  font-family: 'pop';
+  src: url('assets/fonts/Poppins/Poppins-SemiBold.ttf');
+  font-weight: 600;
+}
+
+@font-face {
+  font-family: 'pop';
+  src: url('assets/fonts/Poppins/Poppins-Bold.ttf');
+  font-weight: 700;
+}
+@font-face {
+  font-family: 'header';
+  src: url('assets/fonts/Berkshire_Swash/header.ttf');
+}
+@theme{
+  --font-header:'header';
+  --font-pop:'pop';
+}
