@@ -4,6 +4,11 @@ import countries from '../data/countries.json'
 
 export default function Cards() {
   const [page , setPage] = useState(1);
+  const [loading , setLoading] = useState({})
+
+
+
+
   const start = (page - 1) * 6;
   const visibleCountry = countries.slice(start , start + 6);
   const handlePlus = ()=>{
@@ -27,9 +32,19 @@ export default function Cards() {
       {
         visibleCountry.map((country)=>(
           <div key={country.code }className='relative group flex  flex-col w-[90%] mx-auto h-50  max-w-90  bg-base-100'>
-            <img src={country.image} className='absolute w-full h-full rounded-2xl transition-transform duration-500 ease-out hover:scale-105'  alt={country.name} />
+            {
+              !loading[country.code] && (
+                  <div className="absolute inset-0 flex items-center justify-center">
+                      <span className="loading loading-spinner text-primary" />
+                  </div>
+              )
+            }
+            <img src={country.image} onLoad={()=>{
+              setLoading(prev=>({
+                ...prev,[country.code]:true,
+              }));
+            }} className='absolute w-full h-full rounded-2xl transition-transform duration-500 ease-out hover:scale-105 object-cover'  alt={country.name} />
             <p className='flex justify-center items-center absolute bottom-0 h-6 font-pop text-primary-content left-1/2 -translate-x-1/2 bg-primary/60 w-full  text-center overflow-hidden font-normal transition-all group-hover:opacity-100 opacity-0 duration-300 ease-out group-hover:translate-y-  '>{country.name}</p>
-
           </div>
         ))
       }
