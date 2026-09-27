@@ -1,6 +1,7 @@
 import { useState } from "react"
 import Navbar from "./components/Navbar"
 import Section from "./components/Section"
+import Cards from "./components/Cards"
 
 
 function App() {
@@ -12,6 +13,7 @@ function App() {
     <div data-theme={them} className="bg-base-100 h-screen">
       <Navbar them={them} changeTheme={changeTheme} />
       <Section />
+      <Cards />
     </div>
   )
 }

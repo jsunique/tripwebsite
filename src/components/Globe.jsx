@@ -126,7 +126,7 @@ export default function Globe() {
   return (
     <div
       ref={containerRef}
-      className="h-100 md:w-[50%] w-full overflow-hidden rounded-3xl mx-auto"
+      className="h-100 md:w-[50%] w-full overflow-hidden  mx-auto bg-base-100"
     />
   );
 }
