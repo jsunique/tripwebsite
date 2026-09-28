@@ -2,6 +2,10 @@ import { useState } from "react"
 import Navbar from "./components/Navbar"
 import Section from "./components/Section"
 import Cards from "./components/Cards"
+import Home from "./components/Home"
+import CountryDetail from "./components/CountryDetail"
+import { Routes , Route } from "react-router"
+import Profile from "./components/Profile"
 
 
 function App() {
@@ -12,8 +16,11 @@ function App() {
   return (
     <div data-theme={them} className="bg-base-100 h-screen">
       <Navbar them={them} changeTheme={changeTheme} />
-      <Section />
-      <Cards />
+    <Routes>
+      <Route path="/" element={<Home />} />
+      <Route path="/country/:countryName" element={<CountryDetail />} />
+      <Route path="/profile" element={<Profile />} />
+    </Routes>
     </div>
   )
 }

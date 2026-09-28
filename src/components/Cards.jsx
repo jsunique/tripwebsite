@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import {Link} from 'react-router'
+import {NavLink} from 'react-router'
 import countries from '../data/countries.json'
 
 export default function Cards() {
@@ -31,7 +31,7 @@ export default function Cards() {
     <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 bg-base-100 gap-y-15 pb-5'>
       {
         visibleCountry.map((country)=>(
-          <div key={country.code }className='relative group flex  flex-col w-[90%] mx-auto h-50  max-w-90  bg-base-100'>
+          <NavLink to={`country/${country.name}`} key={country.code }className='relative group flex  flex-col w-[90%] mx-auto h-50  max-w-90  bg-base-100'>
             {
               !loading[country.code] && (
                   <div className="absolute inset-0 flex items-center justify-center">
@@ -45,7 +45,7 @@ export default function Cards() {
               }));
             }} className='absolute w-full h-full rounded-2xl transition-transform duration-500 ease-out hover:scale-105 object-cover'  alt={country.name} />
             <p className='flex justify-center items-center absolute bottom-0 h-6 font-pop text-primary-content left-1/2 -translate-x-1/2 bg-primary/60 w-full  text-center overflow-hidden font-normal transition-all group-hover:opacity-100 opacity-0 duration-300 ease-out group-hover:translate-y-  '>{country.name}</p>
-          </div>
+          </NavLink>
         ))
       }
     </div>
