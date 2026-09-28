@@ -4,16 +4,26 @@ import countries from '../data/countries.json'
 import {Heart , Plane} from 'lucide-react'
 
 export default function CountryDetail() {
+  const [position , setPosition] = useState([]);
   const [liked , setLiked] = useState(false);
-  const [Trip , setTrip] = useState(false);
+  const [trip , setTrip] = useState(false);
   const {countryName} = useParams();
   const [loading , setLoading] = useState(true);
   const singleCountry = countries.find((country)=>{
     return country.name === countryName;
-  })
+  });
+  const countryPosition = `https://nominatim.openstreetmap.org/search?q=${encodeURIComponent(singleCountry.name)}&format=jsonv2&limit=1`;
+  const sendRequest = async()=>{
+    const request = await fetch(countryPosition);
+    const response = await request.json();
+    setPosition([response[0].lon , response[0].lat])
+  }
+  useEffect(()=>{
+    sendRequest();
+  },[])
   return (
     <>
-    <p className='text-center mt-10 w-full bg-primary text-primary-content font-header text-5xl'>{countryName}</p>
+    <p className='text-center mt-10 w-full bg-primary text-primary-content font-header text-3xl'>{countryName}</p>
     {
       loading && (
         <div className="absolute inset-0 flex items-center justify-center">
@@ -21,19 +31,14 @@ export default function CountryDetail() {
         </div>
       )
     }
-  <div className={`flex flex-col w-full max-w-150 mx-auto ${loading ? 'hidden' : 'flex'} `}>
+  <div className={` flex flex-col w-full max-w-150 mx-auto ${loading ? 'hidden' : 'flex'} `}>
     <img onLoad={()=>setLoading(false)} src={singleCountry.image} className='w-full  max-h-80  mt-5 object-cover' alt="" />
-    <div className='flex w-full h-auto mt-2 px-1 justify-between items-center'>
-      <div className='tooltip tooltip-top' data-tip='like'>
-      <Heart className={`text-primary scale-125 cursor-pointer  transition-all duration-300
-        ${liked ? 'fill-primary text-primary ' : ''}`} onClick={()=>setLiked(!liked)} size={35} />
-        </div>
-        <h2 className='font-pop font-semibold text-xl'>{singleCountry.landmark}</h2>
-        <div data-tip='add to my trip' className='tooltip tooltip-top '>
-      <Plane className={`text-primary scale-125 cursor-pointer  transition-all duration-300
-        ${Trip ? 'fill-primary text-primary ' : ''}`} onClick={()=>setTrip(!Trip)} size={35} />
-        </div>
-        
+    <div className='w-full max-w-150 mx-auto flex  h-auto items-center gap-3'>
+      <Heart className={`text-primary  cursor-pointer  transition-all duration-300
+        ${liked ? 'fill-primary text-primary ' : ''}`} onClick={()=>setLiked(!liked)} size={30} />
+      <Plane className={`text-primary  cursor-pointer  transition-all duration-300
+      ${trip ? 'fill-primary text-primary ' : ''}`} onClick={()=>setTrip(!trip)} size={30} />
+      <h2 className='min-w-0 flex-1 px-3  font-pop font-semibold text-xl'>{singleCountry.landmark}</h2>
     </div>
     </div>
     </>
