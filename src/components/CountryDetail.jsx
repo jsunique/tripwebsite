@@ -24,11 +24,15 @@ export default function CountryDetail() {
   <div className={`flex flex-col w-full max-w-150 mx-auto ${loading ? 'hidden' : 'flex'} `}>
     <img onLoad={()=>setLoading(false)} src={singleCountry.image} className='w-full  max-h-80  mt-5 object-cover' alt="" />
     <div className='flex w-full h-auto mt-2 px-1 justify-between items-center'>
+      <div className='tooltip tooltip-top' data-tip='like'>
       <Heart className={`text-primary scale-125 cursor-pointer  transition-all duration-300
         ${liked ? 'fill-primary text-primary ' : ''}`} onClick={()=>setLiked(!liked)} size={35} />
+        </div>
         <h2 className='font-pop font-semibold text-xl'>{singleCountry.landmark}</h2>
+        <div data-tip='add to my trip' className='tooltip tooltip-top '>
       <Plane className={`text-primary scale-125 cursor-pointer  transition-all duration-300
         ${Trip ? 'fill-primary text-primary ' : ''}`} onClick={()=>setTrip(!Trip)} size={35} />
+        </div>
         
     </div>
     </div>
