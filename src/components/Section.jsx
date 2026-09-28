@@ -2,6 +2,7 @@ import React, { useState , useRef, useEffect} from 'react'
 import Globe from './Globe'
 import {ListFilter, Search} from 'lucide-react'
 import countries from '../data/countries.json'
+import { NavLink } from 'react-router'
 
 export default function Section() {
   const searchRef = useRef(null);
@@ -40,10 +41,10 @@ export default function Section() {
                   <p className='flex justify-center items-center p-2'>write a country name</p>
                 ):
                 filteredList.map((country)=>(
-                  <div className='flex justify-between h-8 items-center w-full hover:bg-primary/20 px-2 cursor-pointer'>
+                  <NavLink to={`country/${country.name}`} className='flex justify-between h-8 items-center w-full hover:bg-primary/20 px-2 cursor-pointer'>
                   <p className='font-pop ' key={country.code}>{country.name}</p>
                   <img src={`https://flagcdn.com/${country.code}.svg`} className='w-5 h-5' />
-                  </div>
+                  </NavLink>
                 ))
                 }
               </div>
