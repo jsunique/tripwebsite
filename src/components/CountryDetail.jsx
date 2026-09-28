@@ -4,7 +4,7 @@ import countries from '../data/countries.json'
 import {Heart , Plane} from 'lucide-react'
 
 export default function CountryDetail() {
-  const [position , setPosition] = useState([]);
+  const [weather , setWeather] = useState(null);
   const [liked , setLiked] = useState(false);
   const [trip , setTrip] = useState(false);
   const {countryName} = useParams();
@@ -16,7 +16,11 @@ export default function CountryDetail() {
   const sendRequest = async()=>{
     const request = await fetch(countryPosition);
     const response = await request.json();
-    setPosition([response[0].lon , response[0].lat])
+    const weatherRequest = await fetch(
+  `https://api.open-meteo.com/v1/forecast?latitude=${response[0].lat}&longitude=${response[0].lon}&daily=temperature_2m_max,temperature_2m_min,weather_code&forecast_days=3&timezone=auto`
+    );
+    const weatherResponse = await weatherRequest.json();
+    setWeather(weatherResponse.daily);
   }
   useEffect(()=>{
     sendRequest();
@@ -31,9 +35,33 @@ export default function CountryDetail() {
         </div>
       )
     }
-  <div className={` flex flex-col w-full max-w-150 mx-auto ${loading ? 'hidden' : 'flex'} `}>
+
+
+
+  <div className={`relative flex flex-col w-full max-w-150 mx-auto ${loading ? 'hidden' : 'flex'} `}>
     <img onLoad={()=>setLoading(false)} src={singleCountry.image} className='w-full  max-h-80  mt-5 object-cover' alt="" />
-    <div className='w-full max-w-150 mx-auto flex  h-auto items-center gap-3'>
+    
+    {
+      weather && (
+        <div className='absolute max-w-150 w-full mx-auto bottom-11.5 bg-primary/70 h-10 flex justify-between items-center px-2.5'>
+    <p className="text-primary-content font-bold">
+      Today
+    </p>
+
+    <p className="text-2xl font-semibold text-primary-content">
+      {weather.temperature_2m_max[0]}°C
+    </p>
+
+    <p className="text-primary-content font-bold">
+      ↓ {weather.temperature_2m_min[0]}°C
+    </p>
+        </div>
+      )
+    }
+    
+    
+    
+    <div className='w-full max-w-150 mx-auto flex mt-4 px-3  h-auto items-center gap-3'>
       <Heart className={`text-primary  cursor-pointer  transition-all duration-300
         ${liked ? 'fill-primary text-primary ' : ''}`} onClick={()=>setLiked(!liked)} size={30} />
       <Plane className={`text-primary  cursor-pointer  transition-all duration-300
