@@ -21,13 +21,19 @@ export default function Section() {
                 <Search size={30} className='mr-5' />
               </div>
           </div>
-            {
-                  openModal ? 
-                  filteredList.map((country)=>(
-                    <div>{country.name}</div>
-                  ))
-                  : <h1>reza yazdani</h1>
-            }
+          {
+            openModal &&(
+              <div>
+                {input.trim() === "" ? (
+                  <div>nothing to show</div>
+                ):
+                filteredList.map((country)=>(
+                  <p>{country.name}</p>
+                ))
+                }
+              </div>
+            )
+          }
           <h1 className='font-header text-[27px] text-center'>See the world from near</h1>
           <p className='text-center mt-3 font-pop font-normal md:font-medium px-3'>choose country in the map and see<br /> the unique palce of each country to travel</p>
           <p className='pt-14 text-center font-pop font-normal md:font-medium px-3 text-accent'>
