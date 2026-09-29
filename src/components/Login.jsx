@@ -17,7 +17,7 @@ export default function Login() {
       <input onChange={(e)=>setUsername(e.target.value)} value={username} className='input' type="text" placeholder='write your username' />
       <input onChange={(e)=>setPassword(e.target.value)} value={password} className='input' type="text" placeholder='write your upassword' />
       <button onClick={handleLogin} className='btn btn-primary w-[10%]' type='submit'>submit</button>
-      <p>{state.users ?? "Guest"}</p>
+      <p>{state.currentUserId ?? "Guest"}</p>
     </div>
   )
 }

@@ -1,4 +1,4 @@
-import { createContext, useReducer } from "react";
+import { createContext, useReducer , useEffect } from "react";
 const initialState = {
   currentUserId : null,
   users:{}
@@ -29,10 +29,23 @@ function appReducer(state,action) {
 
 
 
+function getInitialState(){
+  const savedState = localStorage.getItem("travel-app-state");
+  if (savedState) {
+    return JSON.parse(savedState)
+  }
+  else{
+    return initialState
+  }
+}
 
 export  const AppContext = createContext(null);
 export default function AppProvider({children}){
-  const [state , dispatch] = useReducer(appReducer , initialState)
+  const [state , dispatch] = useReducer(appReducer , initialState ,getInitialState);
+  useEffect(()=>{
+  const savedAsText = JSON.stringify(state);
+  localStorage.setItem("travel-app-state",savedAsText)
+},[state])
   return(
     <AppContext.Provider value={{state , dispatch}}>
       {children}
