@@ -9,10 +9,11 @@ export default function CountryDetail() {
   const {state , dispatch} = useContext(AppContext);
   const isLoggedIn = state.currentUserId !== null;
   const [weather , setWeather] = useState(null);
-  const [liked , setLiked] = useState(false);
   const [trip , setTrip] = useState(false);
   const {countryName} = useParams();
   const [loading , setLoading] = useState(true);
+  const currentUser = isLoggedIn ? state.users[state.currentUserId] : null;
+  const liked = currentUser?.likes.includes(countryName) ?? false;
   const singleCountry = countries.find((country)=>{
     return country.name === countryName;
   });
@@ -28,7 +29,17 @@ export default function CountryDetail() {
   }
   useEffect(()=>{
     sendRequest();
-  },[])
+  },[]);
+  function handleLike(){
+    if (!isLoggedIn) {
+      return;
+    }
+    dispatch({
+      type:"TOGGLE_LIKE",
+      payload:countryName,
+    }
+    );
+  }
   return (
     <>
     <p className='text-center mt-10 w-full bg-primary text-primary-content font-header text-3xl'>{countryName}</p>
@@ -66,10 +77,17 @@ export default function CountryDetail() {
     
     
     <div className='w-full max-w-150 mx-auto flex mt-4 px-3  h-auto items-center gap-3'>
+
+
+
       <Heart className={`text-primary transition-all duration-300
         ${liked ? 'fill-primary text-primary ' : ''} ${isLoggedIn ? 'cursor-pointer' : 'cursor-not-allowed opacity-40'}`} 
-        onClick={isLoggedIn ? ()=> setLiked(!liked) : undefined} aria-disabled={!isLoggedIn} 
+        onClick={isLoggedIn ? handleLike : undefined} aria-disabled={!isLoggedIn} 
         size={30} />
+
+
+
+
       <Plane className={`text-primary transition-all duration-300
       ${trip ? 'fill-primary text-primary ' : ''} ${isLoggedIn ? 'cursor-pointer' : 'cursor-not-allowed opacity-40'}`} 
       onClick={isLoggedIn ? ()=> setTrip(!trip) : undefined} aria-disabled={!isLoggedIn} />
