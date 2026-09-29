@@ -9,9 +9,19 @@ function appReducer(state,action) {
     if (!userId) {
       return state;
     }
+    const existingUser = state.users[userId];
+    const user = existingUser ??{
+      likes : [],
+      trip : null,
+    }
+
     return{
       ...state,
       currentUserId:userId,
+        users: {
+          ...state.users,
+          [userId] :user,
+        }
     };
   }
   return state;
