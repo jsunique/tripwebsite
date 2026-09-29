@@ -6,6 +6,7 @@ import Home from "./components/Home"
 import CountryDetail from "./components/CountryDetail"
 import { Routes , Route } from "react-router"
 import Profile from "./components/Profile"
+import Login from "./components/Login"
 
 
 function App() {
@@ -20,6 +21,7 @@ function App() {
       <Route path="/" element={<Home />} />
       <Route path="/country/:countryName" element={<CountryDetail />} />
       <Route path="/profile" element={<Profile />} />
+      <Route path="/login" element={<Login />} />
     </Routes>
     </div>
   )

@@ -23,7 +23,7 @@ export default function Navbar({them , changeTheme}) {
           </>
         } 
         </button>
-        <NavLink to="/profile"  className='flex btn rounded-2xl text-primary'>
+        <NavLink to="/login"  className='flex btn rounded-2xl text-primary'>
         <UserRoundArrowLeft />
         </NavLink>
       </div>

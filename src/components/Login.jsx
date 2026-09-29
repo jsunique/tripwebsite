@@ -1,0 +1,22 @@
+import React, { useState , useContext } from 'react'
+import { AppContext } from '../context/AppContext';
+
+
+export default function Login() {
+  const [username , setUsername] = useState('');
+  const [password , setPassword] = useState('');
+  const {state , dispatch} = useContext(AppContext);
+  const handleLogin = ()=>{
+    dispatch({
+      type:"LOGIN",
+      payload:username,
+    })
+  }
+  return (
+    <div className='flex flex-col gap-3 mt-5 justify-center items-center'>
+      <input onChange={(e)=>setUsername(e.target.value)} value={username} className='input' type="text" placeholder='write your username' />
+      <input onChange={(e)=>setPassword(e.target.value)} value={password} className='input' type="text" placeholder='write your upassword' />
+      <button onClick={handleLogin} className='btn btn-primary w-[10%]' type='submit'>submit</button>
+    </div>
+  )
+}
