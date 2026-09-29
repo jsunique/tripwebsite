@@ -4,6 +4,43 @@ const initialState = {
   users:{}
 };
 function appReducer(state,action) {
+  if (action.type === "TOGGLE_TRIP_COUNTRY") {
+    const userId = state.currentUserId;
+    if (!userId) {
+      return state;
+    }
+    const currentUser = state.users[userId];
+    if (!currentUser) {
+      return state;
+    }
+    const countryName = action.payload;
+    const currentTrip = currentUser.trip ?? {
+      countries: [],
+      companions: [],
+      budget: 0,
+      expenses: [],
+      activities: [],
+    };
+    const alreadyAdded = currentTrip.countries.includes(countryName);
+    const updatedCountries = alreadyAdded ? currentTrip.countries.filter(
+      (name) => name !== countryName
+    )  :
+    [...currentTrip.countries, countryName];
+    return {
+      ...state,
+      users:{
+        ...state.users,
+        [userId] : {
+          ...currentUser,
+          trip:{
+            ...currentTrip,
+            countries:updatedCountries,
+          }
+        }
+      }
+    }
+    
+  }
   if (action.type === "LOGIN") {
     const userId = action.payload.trim().toLowerCase();
     if (!userId) {
