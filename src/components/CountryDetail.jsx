@@ -9,11 +9,11 @@ export default function CountryDetail() {
   const {state , dispatch} = useContext(AppContext);
   const isLoggedIn = state.currentUserId !== null;
   const [weather , setWeather] = useState(null);
-  const [trip , setTrip] = useState(false);
   const {countryName} = useParams();
   const [loading , setLoading] = useState(true);
   const currentUser = isLoggedIn ? state.users[state.currentUserId] : null;
   const liked = currentUser?.likes.includes(countryName) ?? false;
+  const addToTrip = currentUser?.trip?.countries?.includes(countryName) ?? false;
   const singleCountry = countries.find((country)=>{
     return country.name === countryName;
   });
@@ -27,9 +27,11 @@ export default function CountryDetail() {
     const weatherResponse = await weatherRequest.json();
     setWeather(weatherResponse.daily);
   }
-  useEffect(()=>{
-    sendRequest();
-  },[]);
+  useEffect(() => {
+  setLoading(true);
+  setWeather(null);
+  sendRequest();
+}, [countryName]);
   function handleLike(){
     if (!isLoggedIn) {
       return;
@@ -40,6 +42,15 @@ export default function CountryDetail() {
     }
     );
   }
+function handleTrip(){
+  if (!isLoggedIn) {
+    return;
+  }
+  dispatch({
+    type: "TOGGLE_TRIP_COUNTRY",
+    payload : countryName,
+  })
+}
   return (
     <>
     <p className='text-center mt-10 w-full bg-primary text-primary-content font-header text-3xl'>{countryName}</p>
@@ -84,13 +95,20 @@ export default function CountryDetail() {
         ${liked ? 'fill-primary text-primary ' : ''} ${isLoggedIn ? 'cursor-pointer' : 'cursor-not-allowed opacity-40'}`} 
         onClick={isLoggedIn ? handleLike : undefined} aria-disabled={!isLoggedIn} 
         size={30} />
-
-
-
-
-      <Plane className={`text-primary transition-all duration-300
-      ${trip ? 'fill-primary text-primary ' : ''} ${isLoggedIn ? 'cursor-pointer' : 'cursor-not-allowed opacity-40'}`} 
-      onClick={isLoggedIn ? ()=> setTrip(!trip) : undefined} aria-disabled={!isLoggedIn} />
+      <Plane
+        className={`
+          text-primary transition-all duration-300
+          ${addedToTrip ? "fill-primary" : ""}
+          ${
+            isLoggedIn
+              ? "cursor-pointer"
+              : "cursor-not-allowed opacity-40"
+          }
+        `}
+        onClick={isLoggedIn ? handleTrip : undefined}
+        aria-disabled={!isLoggedIn}
+        size={30}
+      />
       <h2 className='min-w-0 flex-1 px-3  font-pop font-semibold text-xl'>{singleCountry.landmark}</h2>
     </div>
     </div>

@@ -4,6 +4,43 @@ const initialState = {
   users:{}
 };
 function appReducer(state,action) {
+  if (action.type === "TOGGLE_LIKE") {
+  const userId = state.currentUserId;
+
+  if (!userId) {
+    return state;
+  }
+
+  const currentUser = state.users[userId];
+
+  if (!currentUser) {
+    return state;
+  }
+
+  const countryName = action.payload;
+
+  const alreadyLiked =
+    currentUser.likes.includes(countryName);
+
+  const updatedLikes = alreadyLiked
+    ? currentUser.likes.filter(
+        (name) => name !== countryName
+      )
+    : [...currentUser.likes, countryName];
+
+  return {
+    ...state,
+
+    users: {
+      ...state.users,
+
+      [userId]: {
+        ...currentUser,
+        likes: updatedLikes,
+      },
+    },
+  };
+}
   if (action.type === "TOGGLE_TRIP_COUNTRY") {
     const userId = state.currentUserId;
     if (!userId) {
