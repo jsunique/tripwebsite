@@ -24,6 +24,12 @@ function appReducer(state,action) {
         }
     };
   }
+  if (action.type === "LOGOUT") {
+    return {
+      ...state,
+      currentUserId:null,
+    }
+  }
   return state;
 }
 
