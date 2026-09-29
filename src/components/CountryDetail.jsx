@@ -1,9 +1,13 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState , useContext } from 'react'
 import { useParams } from 'react-router'
 import countries from '../data/countries.json'
 import {Heart , Plane} from 'lucide-react'
+import { AppContext } from '../context/AppContext'
+
 
 export default function CountryDetail() {
+  const {state , dispatch} = useContext(AppContext);
+  const isLoggedIn = state.currentUserId !== null;
   const [weather , setWeather] = useState(null);
   const [liked , setLiked] = useState(false);
   const [trip , setTrip] = useState(false);
@@ -62,10 +66,13 @@ export default function CountryDetail() {
     
     
     <div className='w-full max-w-150 mx-auto flex mt-4 px-3  h-auto items-center gap-3'>
-      <Heart className={`text-primary  cursor-pointer  transition-all duration-300
-        ${liked ? 'fill-primary text-primary ' : ''}`} onClick={()=>setLiked(!liked)} size={30} />
-      <Plane className={`text-primary  cursor-pointer  transition-all duration-300
-      ${trip ? 'fill-primary text-primary ' : ''}`} onClick={()=>setTrip(!trip)} size={30} />
+      <Heart className={`text-primary transition-all duration-300
+        ${liked ? 'fill-primary text-primary ' : ''} ${isLoggedIn ? 'cursor-pointer' : 'cursor-not-allowed opacity-40'}`} 
+        onClick={isLoggedIn ? ()=> setLiked(!liked) : undefined} aria-disabled={!isLoggedIn} 
+        size={30} />
+      <Plane className={`text-primary transition-all duration-300
+      ${trip ? 'fill-primary text-primary ' : ''} ${isLoggedIn ? 'cursor-pointer' : 'cursor-not-allowed opacity-40'}`} 
+      onClick={isLoggedIn ? ()=> setTrip(!trip) : undefined} aria-disabled={!isLoggedIn} />
       <h2 className='min-w-0 flex-1 px-3  font-pop font-semibold text-xl'>{singleCountry.landmark}</h2>
     </div>
     </div>
