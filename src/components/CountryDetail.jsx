@@ -98,7 +98,7 @@ function handleTrip(){
       <Plane
         className={`
           text-primary transition-all duration-300
-          ${addedToTrip ? "fill-primary" : ""}
+          ${addToTrip ? "fill-primary" : ""}
           ${
             isLoggedIn
               ? "cursor-pointer"
