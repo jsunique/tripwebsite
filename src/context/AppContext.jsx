@@ -86,6 +86,33 @@ function appReducer(state, action) {
     },
   };
 }
+if (action.type === "REMOVE_COMPANION") {
+  const userId = state.currentUserId;
+  const currentUser = state.users[userId];
+  const { countryName, index } = action.payload;
+  const trip = currentUser?.trips?.[countryName];
+
+  if (!trip || index < 0 || index >= trip.companions.length) {
+    return state;
+  }
+
+  return {
+    ...state,
+    users: {
+      ...state.users,
+      [userId]: {
+        ...currentUser,
+        trips: {
+          ...currentUser.trips,
+          [countryName]: {
+            ...trip,
+            companions: trip.companions.filter((_, i) => i !== index),
+          },
+        },
+      },
+    },
+  };
+}
 
   if (action.type === "LOGIN") {
     const userId = action.payload.trim().toLowerCase();
