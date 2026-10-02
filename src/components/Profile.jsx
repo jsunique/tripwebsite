@@ -42,7 +42,7 @@ export default function Profile() {
               <img src={countryData.image} className='w-full h-44 sm:h-48 object-cover  rounded-2xl' />
               <p className=' text-primary px-5 font-semibold text-xl'>{countryName}</p>
               <button className='hover:bg-accent cursor-pointer hover:text-base-100 border border-accent mt-2 h-8 mx-auto text-accent max-w-70 w-[50%] rounded-4xl '>Add To Trip</button>
-              <button className='hover:bg-red-400 hover:text-amber-100 cursor-pointer border-accent mt-2 h-8 mx-auto text-red-400 font-semibold max-w-70 w-[50%] rounded-4xl '>Remove from list</button>
+              <button onClick={()=> dispatch({type:"TOGGLE_LIKE" , payload:countryName})} className='hover:bg-red-400 hover:text-amber-100 cursor-pointer border-accent mt-2 h-8 mx-auto text-red-400 font-semibold max-w-70 w-[50%] rounded-4xl '>Remove from list</button>
             </div>
                 )
               })
@@ -72,7 +72,7 @@ export default function Profile() {
               <img src={countryData.image} className='w-full h-44 sm:h-48 object-cover  rounded-2xl' />
               <p className=' text-primary px-5 font-semibold text-xl'>{countryName}</p>
               <button className='hover:bg-primary bg-primary/80 cursor-pointer   mt-2 h-10 mx-auto text-primary-content  max-w-70 w-[50%] rounded-4xl '>Manage Travel</button>
-              <button className='hover:bg-red-400 hover:text-amber-100 cursor-pointer border-accent mt-2 h-8 mx-auto text-red-400 font-semibold max-w-70 w-[50%] rounded-4xl '>Remove from list</button>
+              <button onClick={()=>dispatch({type:"TOGGLE_TRIP_COUNTRY",payload:countryName})} className='hover:bg-red-400 hover:text-amber-100 cursor-pointer border-accent mt-2 h-8 mx-auto text-red-400 font-semibold max-w-70 w-[50%] rounded-4xl '>Remove from list</button>
             </div>
                 )
               }))
