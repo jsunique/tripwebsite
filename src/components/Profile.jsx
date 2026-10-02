@@ -22,8 +22,8 @@ export default function Profile() {
           <div className='grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 max-w-5xl mx-auto px-4 mt-6 bg-base-100'>
             {              
             favorites.length === 0 ? (
-                <div className=' w-full translate-x-1/2  h-60 flex flex-col mx-auto justify-center items-center'>
-                  <p className='font-header text-center '>you must add some favorites from countries list<br />
+                <div className=' w-full md:translate-x-85  h-60 flex flex-col mx-auto justify-center items-center'>
+                  <p className='font-header text-center '>you must add some favorites from  list<br />
                   there is nothing to show you :(</p>
                   <button onClick={()=>navigate('/')} className='text-primary-content p-3 font-pop cursor-pointer mt-5 rounded-4xl bg-primary '>Go Home</button>
 
@@ -41,7 +41,7 @@ export default function Profile() {
             <div className='min-w-0 w-full bg-base-200 rounded-3xl p-3 flex flex-col'>
               <img src={countryData.image} className='w-full h-44 sm:h-48 object-cover  rounded-2xl' />
               <p className=' text-primary px-5 font-semibold text-xl'>{countryName}</p>
-              <button className='hover:bg-accent cursor-pointer hover:text-base-100 border border-accent mt-2 h-8 mx-auto text-accent max-w-70 w-[50%] rounded-4xl '>Add To Trip</button>
+              <button onClick={()=> dispatch({type:"TOGGLE_TRIP_COUNTRY",payload:countryName})} className='hover:bg-accent cursor-pointer hover:text-base-100 border border-accent mt-2 h-8 mx-auto text-accent max-w-70 w-[50%] rounded-4xl '>Add To Trip</button>
               <button onClick={()=> dispatch({type:"TOGGLE_LIKE" , payload:countryName})} className='hover:bg-red-400 hover:text-amber-100 cursor-pointer border-accent mt-2 h-8 mx-auto text-red-400 font-semibold max-w-70 w-[50%] rounded-4xl '>Remove from list</button>
             </div>
                 )
@@ -53,7 +53,7 @@ export default function Profile() {
         <div className='grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 max-w-5xl mx-auto px-4 mt-6 bg-base-100'>
             {
               trips.length === 0 ? (
-                <div className=' w-full translate-x-1/2  h-60 flex flex-col mx-auto justify-center items-center'>
+                <div className=' w-full md:translate-x-85  h-60 flex flex-col mx-auto justify-center items-center'>
                   <p className='font-header text-center '>you must add some trip from countries list<br />
                   there is nothing to show you :(</p>
                   <button onClick={()=>navigate('/')} className='text-primary-content p-3 font-pop cursor-pointer mt-5 rounded-4xl bg-primary '>Go Home</button>
