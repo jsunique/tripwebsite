@@ -9,8 +9,16 @@ export default function TripDetail() {
   const [showingInput , setShowingInput] = useState(false);
   const [inputC , setInputC] = useState("");
   const trip = currentUser?.trips?.[countryName];
-  console.log("trip:" , trip);
-  console.log(currentUser);
+  const addCompanion = ()=>{
+    if (inputC.trim() === "") {
+      return
+    }
+    else{
+      dispatch({type:'ADD_COMPANION',payload:{countryName,companionName:inputC}});
+      setShowingInput(false);
+    };
+    setInputC("");
+  }
   return (
     <>
     <div className='w-full h-13 flex justify-center items-center bg-primary-content mt-5'>
@@ -41,6 +49,17 @@ export default function TripDetail() {
             <p className='text-primary mt-5 text-center pb-5'>No Companions added Yet</p>
           )
         }
+        {
+          trip.companions.map((name , index)=>(
+            <>
+            <div className='flex justify-between sm:justify-evenly px-5 pb-3 mt-5 items-center'>
+              <p>{name}</p>
+              <button className='btn bg-red-400 text-primary-content max-w-20 w-[30%] h-8'>remove</button>
+            </div>
+            <div className='w-[80%] h-px bg-primary mx-auto'></div>
+            </>
+          ))
+        }
 
 
 
@@ -49,7 +68,7 @@ export default function TripDetail() {
         <div className='flex flex-col items-center px-3 gap-5 pb-5 mt-5'>
           <input type="text" placeholder='who you want to go with?' className='w-[90%] px-3 outline-none border border-base-content rounded-2xl h-10 max-w-70' value={inputC} onChange={(e)=>setInputC(e.target.value)} />
         <div className='flex justify-evenly'>
-          <button className='btn btn-primary max-w-20 w-[40%] h-10'>accept</button>
+          <button onClick={addCompanion} className='btn btn-primary max-w-20 w-[40%] h-10'>accept</button>
           <button onClick={()=>setShowingInput(false)} className='btn bg-red-400 text-primary-content max-w-20 w-[40%] h-10'>cancel</button>
           </div>
         </div>
