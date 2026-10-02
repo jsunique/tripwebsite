@@ -166,6 +166,65 @@ if (action.type === "REMOVE_COMPANION") {
     },
   };
 }
+if (action.type === "ADD_EXPENSE") {
+  const userId = state.currentUserId;
+  const currentUser = state.users[userId];
+  const { countryName, title, amount } = action.payload;
+  const trip = currentUser?.trips?.[countryName];
+
+  if (!trip) return state;
+
+  const expense = {
+    id: crypto.randomUUID(),
+    title,
+    amount,
+  };
+
+  return {
+    ...state,
+    users: {
+      ...state.users,
+      [userId]: {
+        ...currentUser,
+        trips: {
+          ...currentUser.trips,
+          [countryName]: {
+            ...trip,
+            expenses: [...trip.expenses, expense],
+          },
+        },
+      },
+    },
+  };
+}
+
+if (action.type === "REMOVE_EXPENSE") {
+  const userId = state.currentUserId;
+  const currentUser = state.users[userId];
+  const { countryName, expenseId } = action.payload;
+  const trip = currentUser?.trips?.[countryName];
+
+  if (!trip) return state;
+
+  return {
+    ...state,
+    users: {
+      ...state.users,
+      [userId]: {
+        ...currentUser,
+        trips: {
+          ...currentUser.trips,
+          [countryName]: {
+            ...trip,
+            expenses: trip.expenses.filter(
+              (expense) => expense.id !== expenseId
+            ),
+          },
+        },
+      },
+    },
+  };
+}
 
   if (action.type === "LOGIN") {
     const userId = action.payload.trim().toLowerCase();

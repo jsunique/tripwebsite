@@ -3,6 +3,9 @@ import { useParams } from 'react-router'
 import { AppContext } from '../context/AppContext'
 
 export default function TripDetail() {
+  const [showingExpenseInput, setShowingExpenseInput] = useState(false);
+  const [expenseTitle, setExpenseTitle] = useState("");
+  const [expenseAmount, setExpenseAmount] = useState("");
   const {countryName} = useParams();
   const {state , dispatch} = useContext(AppContext);
   const currentUser = state.users[state.currentUserId];
@@ -11,6 +14,10 @@ export default function TripDetail() {
   const [inputC , setInputC] = useState("");
   const [inputA , setInputA] = useState("");
   const trip = currentUser?.trips?.[countryName];
+  const spent = trip.expenses.reduce(
+  (sum, expense) => sum + expense.amount,
+  0
+);
   const addCompanion = ()=>{
     if (inputC.trim() === "") {
       return
@@ -31,6 +38,21 @@ export default function TripDetail() {
     };
     setInputA("");
   }
+  function addExpense() {
+  const title = expenseTitle.trim();
+  const amount = Number(expenseAmount);
+
+  if (!title || !Number.isFinite(amount) || amount <= 0) return;
+
+  dispatch({
+    type: "ADD_EXPENSE",
+    payload: { countryName, title, amount },
+  });
+
+  setExpenseTitle("");
+  setExpenseAmount("");
+  setShowingExpenseInput(false);
+}
   return (
     <>
     <div className='w-full h-13 flex justify-center items-center bg-primary-content mt-5'>
@@ -133,9 +155,66 @@ export default function TripDetail() {
         <div className='bg-base-200 mx-auto rounded-3xl mt-5 w-[80%] h-auto'>
       <div className='flex justify-between px-5 items-center py-1 bg-base-200'>
         <p className='text-primary text-xl'>Expenses</p>
-        <button className='btn btn-primary w-10 h-10 text-xl mt-2'>+</button>
+        <button onClick={()=>setShowingExpenseInput(true)} className='btn btn-primary w-10 h-10 text-xl mt-2'>+</button>
       </div>
       <div className='w-[80%] h-px bg-primary mx-auto mt-3'></div>
+      {showingExpenseInput && (
+  <div className="flex flex-col gap-3 p-5 items-center">
+    <input
+      className="w-[90%] px-3 outline-none border border-base-content rounded-2xl h-10 max-w-70"
+      placeholder="What did you pay for?"
+      value={expenseTitle}
+      onChange={(e) => setExpenseTitle(e.target.value)}
+    />
+
+    <input
+      className="w-[90%] px-3 outline-none border border-base-content rounded-2xl h-10 max-w-70"
+      type="number"
+      min="0"
+      placeholder="Amount"
+      value={expenseAmount}
+      onChange={(e) => setExpenseAmount(e.target.value)}
+    />
+
+    <div className="flex gap-3">
+      <button type="button" className="btn btn-primary max-w-20 w-[40%] h-10" onClick={addExpense}>
+        accept
+      </button>
+      <button
+        type="button"
+        className="btn bg-red-400 text-primary-content max-w-20 w-[40%] h-10"
+        onClick={() => setShowingExpenseInput(false)}
+      >
+        Cancel
+      </button>
+    </div>
+  </div>
+)}
+{trip.expenses.map((expense) => (
+  <div
+    key={expense.id}
+    className="flex justify-evenly items-center gap-3 px-5 py-2"
+  >
+    <span>{expense.title}</span>
+    <span>{expense.amount}</span>
+
+    <button
+      type="button"
+      onClick={() =>
+        dispatch({
+          type: "REMOVE_EXPENSE",
+          payload: {
+            countryName,
+            expenseId: expense.id,
+          },
+        })
+      }
+      className="btn bg-red-400 text-primary-content h-8"
+    >
+      remove
+    </button>
+  </div>
+))}
       {
           trip.expenses.length === 0 &&(
             <p className='text-primary mt-5 text-center pb-5'>No Expenses added Yet</p>
