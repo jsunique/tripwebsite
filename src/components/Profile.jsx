@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { useContext } from 'react'
 import { AppContext } from '../context/AppContext'
-
+import countries from '../data/countries.json'
 
 export default function Profile() {
   const {state , dispatch } = useContext(AppContext);
@@ -12,12 +12,32 @@ export default function Profile() {
   return (
     <>
     <div className='w-[70%] h-10 bg-base-300 mx-auto mt-5 rounded-3xl flex max-w-60'>
-      <button onClick={()=>setActiveTab('favorites')} className={`cursor-pointer hover:opacity-95 rounded-2xl  h-full w-1/2  font-pop${activeTab==="favorites" ? ' bg-primary text-primary-content'  : 'bg-base-100 text-base-content' }`}>Favorites</button>
-      <button onClick={()=>setActiveTab('trip')} className={`cursor-pointer hover:opacity-95  rounded-2xl  h-full w-1/2  font-pop ${activeTab==="trip" ? 'text-primary-content bg-primary'  : 'bg-base-100 text-base-content' }`}>My trip</button>
+      <button onClick={()=>setActiveTab('favorites')} className={`cursor-pointer hover:opacity-95 rounded-2xl bg-base-300  h-full w-1/2  font-pop${activeTab==="favorites" ? ' bg-primary text-primary-content'  : 'bg-base-100 text-base-content' }`}>Favorites</button>
+      <button onClick={()=>setActiveTab('trip')} className={`cursor-pointer hover:opacity-95  rounded-2xl  h-full w-1/2  font-pop ${activeTab==="trip" ? 'text-primary-content bg-primary'  : 'bg-base-300 text-base-content' }`}>My trip</button>
     </div>
         {
-          activeTab === 'favorites' ? 
-            <div>vahid yazdani</div>
+          activeTab === 'favorites' ?
+          <div className='grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 max-w-5xl mx-auto px-4 mt-6'>
+            {
+              favorites.map((countryName) =>{
+                const countryData = countries.find(
+                  (item) => item.name === countryName
+                );
+                if(!countryData){
+                  return null
+                }
+                return(
+            <div className='min-w-0 w-full bg-base-200 rounded-3xl p-3 flex flex-col'>
+              <img src={countryData.image} className='w-full h-44 sm:h-48 object-cover object-bottom rounded-2xl' />
+              <p className=' text-primary px-5 font-semibold text-xl'>{countryName}</p>
+              <button className='hover:bg-accent cursor-pointer hover:text-base-100 border border-accent mt-2 h-8 mx-auto text-accent max-w-70 w-[50%] rounded-4xl '>Add To Trip</button>
+              <button className='hover:bg-red-400 hover:text-amber-100 cursor-pointer border-accent mt-2 h-8 mx-auto text-red-400 font-semibold max-w-70 w-[50%] rounded-4xl '>Remove from list</button>
+            </div>
+                )
+              })
+            }
+
+          </div>
             :
             <div>reza yazdani</div>
         }
