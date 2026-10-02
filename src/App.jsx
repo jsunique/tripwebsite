@@ -16,7 +16,7 @@ function App() {
     setThem(current => current === "dark" ? 'light' : 'dark')
   }
   return (
-    <div data-theme={them} className="bg-base-100 h-screen">
+    <div data-theme={them} className="bg-base-100 min-h-screen">
       <Navbar them={them} changeTheme={changeTheme} />
     <Routes>
       <Route path="/" element={<Home />} />
