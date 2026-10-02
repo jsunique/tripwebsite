@@ -1,4 +1,4 @@
-import React, { useContext } from 'react'
+import React, { useContext, useState } from 'react'
 import { useParams } from 'react-router'
 import { AppContext } from '../context/AppContext'
 
@@ -6,6 +6,7 @@ export default function TripDetail() {
   const {countryName} = useParams();
   const {state , dispatch} = useContext(AppContext);
   const currentUser = state.users[state.currentUserId];
+  const [showingInput , setShowingInput] = useState(false);
   const trip = currentUser?.trips?.[countryName];
   console.log("trip:" , trip);
   console.log(currentUser);
@@ -31,14 +32,33 @@ export default function TripDetail() {
     <div className='bg-base-200 mx-auto rounded-3xl mt-5 w-[80%] h-auto'>
       <div className='flex justify-between px-5 items-center py-1'>
         <p className='text-primary text-xl'>Companions</p>
-        <button className='btn btn-primary w-10 h-10 text-xl mt-2'>+</button>
+        <button onClick={()=>setShowingInput(true)} className='btn btn-primary w-10 h-10 text-xl mt-2'>+</button>
       </div>
       <div className='w-[80%] h-px bg-primary mx-auto mt-3'></div>
               {
-          trip.companions.length === 0 &&(
+         !showingInput && trip.companions.length === 0 &&(
             <p className='text-primary mt-5 text-center pb-5'>No Companions added Yet</p>
           )
         }
+
+
+
+{
+  showingInput && (
+        <div className='flex flex-col items-center px-3 gap-5 pb-5 mt-5'>
+          <input type="text" placeholder='who you want to go with?' className='w-[90%] px-3 outline-none border border-base-content rounded-2xl h-10 max-w-70' />
+        <div className='flex justify-evenly'>
+          <button className='btn btn-primary max-w-20 w-[40%] h-10'>accept</button>
+          <button onClick={()=>setShowingInput(false)} className='btn bg-red-400 text-primary-content max-w-20 w-[40%] h-10'>cancel</button>
+          </div>
+        </div>
+  )
+}
+
+
+
+
+
     </div>
       <div className='bg-base-200 mx-auto rounded-3xl mt-5 w-[80%] h-auto'>
       <div className='flex justify-between px-5 items-center py-1'>
@@ -47,7 +67,7 @@ export default function TripDetail() {
       </div>
       <div className='w-[80%] h-px bg-primary mx-auto mt-3'></div>
        {
-          trip.companions.length === 0 &&(
+          trip.activities.length === 0 &&(
             <p className='text-primary mt-5 text-center pb-5'>No Activities added Yet</p>
           )
         }
@@ -59,7 +79,7 @@ export default function TripDetail() {
       </div>
       <div className='w-[80%] h-px bg-primary mx-auto mt-3'></div>
       {
-          trip.companions.length === 0 &&(
+          trip.expenses.length === 0 &&(
             <p className='text-primary mt-5 text-center pb-5'>No Expenses added Yet</p>
           )
         }
