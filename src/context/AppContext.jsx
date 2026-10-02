@@ -86,6 +86,59 @@ function appReducer(state, action) {
     },
   };
 }
+if (action.type === "ADD_ACTIVITY") {
+  const userId = state.currentUserId;
+  const currentUser = state.users[userId];
+  const { countryName, activityName } = action.payload;
+  const trip = currentUser?.trips?.[countryName];
+  const name = activityName.trim();
+
+  if (!trip || !name) return state;
+
+  return {
+    ...state,
+    users: {
+      ...state.users,
+      [userId]: {
+        ...currentUser,
+        trips: {
+          ...currentUser.trips,
+          [countryName]: {
+            ...trip,
+            activities: [...trip.activities, name],
+          },
+        },
+      },
+    },
+  };
+}
+if (action.type === "REMOVE_ACTIVITY") {
+  const userId = state.currentUserId;
+  const currentUser = state.users[userId];
+  const { countryName, index } = action.payload;
+  const trip = currentUser?.trips?.[countryName];
+
+  if (!trip || index < 0 || index >= trip.activities.length) {
+    return state;
+  }
+
+  return {
+    ...state,
+    users: {
+      ...state.users,
+      [userId]: {
+        ...currentUser,
+        trips: {
+          ...currentUser.trips,
+          [countryName]: {
+            ...trip,
+            activities: trip.activities.filter((_, i) => i !== index),
+          },
+        },
+      },
+    },
+  };
+}
 if (action.type === "REMOVE_COMPANION") {
   const userId = state.currentUserId;
   const currentUser = state.users[userId];
