@@ -1,0 +1,278 @@
+[33mcommit e58be9db2d85e9619603f04c7f24a5d46fca3cfc[m[33m ([m[1;36mHEAD[m[33m -> [m[1;32mlogin[m[33m)[m
+Author: pythonunique <v.yazdani79@gmail.com>
+Date:   Tue Sep 29 19:03:25 2026 +0330
+
+    feat:add travel
+
+[33mcommit e4d1123c2aaaf4ad54819894863cd18a955cb554[m
+Author: pythonunique <v.yazdani79@gmail.com>
+Date:   Tue Sep 29 17:14:40 2026 +0330
+
+    feat:add trip to users
+
+[33mcommit a9e9711d617f241b4a89fa16ec5f52b8cf2f216f[m
+Author: pythonunique <v.yazdani79@gmail.com>
+Date:   Tue Sep 29 16:54:20 2026 +0330
+
+    feat:add like to user
+
+[33mcommit 6114e52ccb3d6deb55f08b01b27cc3624eedcc09[m
+Author: pythonunique <v.yazdani79@gmail.com>
+Date:   Tue Sep 29 14:47:22 2026 +0330
+
+    feat:like is not allowed for not log in users
+
+[33mcommit 397c907a46e7c6174bac20bde4e14da51fb5786b[m
+Author: pythonunique <v.yazdani79@gmail.com>
+Date:   Tue Sep 29 14:27:58 2026 +0330
+
+    feat:login user
+
+[33mcommit dbad08c7c366a9540ff677a9cb2c1b22151f65ab[m
+Author: pythonunique <v.yazdani79@gmail.com>
+Date:   Tue Sep 29 13:40:14 2026 +0330
+
+    feat:logout for users
+
+[33mcommit 2dfdd3ae0d299f491559d1ec0189c8a90fc4374f[m
+Author: pythonunique <v.yazdani79@gmail.com>
+Date:   Tue Sep 29 12:59:47 2026 +0330
+
+    feat:connect to localstorage
+
+[33mcommit 4f1afe2b8e8ddddd14cbf1698a0d32f164a61d89[m
+Author: pythonunique <v.yazdani79@gmail.com>
+Date:   Tue Sep 29 12:37:01 2026 +0330
+
+    feat:complete context compoenent
+
+[33mcommit 69504a07e2d70def0e47d241f9d335be2e02e66a[m
+Author: pythonunique <v.yazdani79@gmail.com>
+Date:   Tue Sep 29 10:51:17 2026 +0330
+
+    feat:make a new user
+
+[33mcommit 3576b794c2ae188b9389bbf4518514bc6cf4090e[m[33m ([m[1;31morigin/development[m[33m, [m[1;32mdevelopment[m[33m)[m
+Merge: c394cd2 d9608ef
+Author: vahidyazdani <v.yazdani79@gmail.com>
+Date:   Tue Sep 29 01:48:16 2026 +0330
+
+    Merge pull request #12 from jsunique/detail
+    
+    Detail
+
+[33mcommit d9608ef78640d385f2d8cdbf8e671b369ab07794[m[33m ([m[1;31morigin/detail[m[33m)[m
+Author: pythonunique <v.yazdani79@gmail.com>
+Date:   Tue Sep 29 01:46:44 2026 +0330
+
+    feat:make a single page completely
+
+[33mcommit edf6199a66aeb87a338cd6a4e5a2ec17a9b39f22[m
+Author: pythonunique <v.yazdani79@gmail.com>
+Date:   Tue Sep 29 00:03:38 2026 +0330
+
+    change:change the icon place
+
+[33mcommit 1c344d2e3f64a208d9f907ac5c82114c0ffb4b02[m
+Author: pythonunique <v.yazdani79@gmail.com>
+Date:   Mon Sep 28 22:24:45 2026 +0330
+
+    feat:add a tootlip for icons
+
+[33mcommit 37c44a4e69053dd0924d3355c765412067a6553b[m
+Author: pythonunique <v.yazdani79@gmail.com>
+Date:   Mon Sep 28 22:18:48 2026 +0330
+
+    feat:Add a palce name
+
+[33mcommit 07e5a2386e961655c7e39ebd28843f273314ec14[m
+Author: pythonunique <v.yazdani79@gmail.com>
+Date:   Mon Sep 28 22:13:25 2026 +0330
+
+    feat:add to trip icon
+
+[33mcommit f9b5ad7862ec431fad92e47dbf5525d42f723d87[m
+Author: pythonunique <v.yazdani79@gmail.com>
+Date:   Mon Sep 28 22:08:25 2026 +0330
+
+    feat:detail page and like state
+
+[33mcommit c394cd26a32d55147cb38820feb43ef3f56c72df[m
+Merge: 1759150 593ba65
+Author: vahidyazdani <v.yazdani79@gmail.com>
+Date:   Mon Sep 28 17:12:32 2026 +0330
+
+    Merge pull request #10 from jsunique/routing
+    
+    feat:all thr site routes
+
+[33mcommit 593ba65ac480863a7fe0c2c58960ce79fcbce7ee[m[33m ([m[1;31morigin/routing[m[33m)[m
+Author: pythonunique <v.yazdani79@gmail.com>
+Date:   Mon Sep 28 17:10:52 2026 +0330
+
+    feat:all thr site routes
+
+[33mcommit 1759150d2c9e0a24926a882c1369f5486efdb8af[m
+Merge: 02981fa 0267516
+Author: vahidyazdani <v.yazdani79@gmail.com>
+Date:   Mon Sep 28 16:22:06 2026 +0330
+
+    Merge pull request #9 from jsunique/search
+    
+    Search
+
+[33mcommit 0267516207f05bf026a5db6e072d91696300aba6[m[33m ([m[1;31morigin/search[m[33m)[m
+Author: pythonunique <v.yazdani79@gmail.com>
+Date:   Mon Sep 28 16:17:54 2026 +0330
+
+    feat:make input complete
+
+[33mcommit 648fe931c471f20092688afd73acc79d85d7b428[m
+Author: pythonunique <v.yazdani79@gmail.com>
+Date:   Mon Sep 28 12:51:28 2026 +0330
+
+    feat:empty input
+
+[33mcommit 00c49fcc789d384bf8989033f94705e1dab96511[m
+Author: pythonunique <v.yazdani79@gmail.com>
+Date:   Mon Sep 28 12:37:54 2026 +0330
+
+    feat:logic of searchbox
+
+[33mcommit fb8a909462113022cc0a683317aedad79f65d033[m
+Author: pythonunique <v.yazdani79@gmail.com>
+Date:   Mon Sep 28 11:50:02 2026 +0330
+
+    feat:input for search
+
+[33mcommit 02981faa29f3773cef914808feea3af4b153708a[m
+Merge: 2b7c641 e23ee0e
+Author: vahidyazdani <v.yazdani79@gmail.com>
+Date:   Sun Sep 27 20:11:53 2026 +0330
+
+    Merge pull request #7 from jsunique/cards
+    
+    Cards
+
+[33mcommit e23ee0ee0de9f5bfaababe65bc19e012f5673fb8[m[33m ([m[1;31morigin/cards[m[33m)[m
+Author: pythonunique <v.yazdani79@gmail.com>
+Date:   Sun Sep 27 19:01:33 2026 +0330
+
+    feat: spinner a not unloaded  image
+
+[33mcommit 03a94f15b3f9ccf476a60885fb063df591cf045a[m
+Author: pythonunique <v.yazdani79@gmail.com>
+Date:   Sun Sep 27 18:38:58 2026 +0330
+
+    feat:make a cards of all countries
+
+[33mcommit 035680f6240614e6792ce44162c9270b233883fe[m
+Author: pythonunique <v.yazdani79@gmail.com>
+Date:   Sun Sep 27 16:50:57 2026 +0330
+
+    feat:make style for pagination button
+
+[33mcommit 33c26336fc24e94404b2217231de10d900cd86fe[m
+Author: pythonunique <v.yazdani79@gmail.com>
+Date:   Sun Sep 27 15:38:52 2026 +0330
+
+    feat:add all countries card
+
+[33mcommit 2b7c641390af80a0a2322a2df38f574f01da2813[m
+Merge: 246255a 7766cbe
+Author: vahidyazdani <v.yazdani79@gmail.com>
+Date:   Sat Sep 26 00:18:20 2026 +0330
+
+    Merge pull request #6 from jsunique/section
+    
+    feat:add a text below
+
+[33mcommit 7766cbe0b595efe714e1c03c7b134d06755a3c7a[m[33m ([m[1;31morigin/section[m[33m)[m
+Author: pythonunique <v.yazdani79@gmail.com>
+Date:   Sat Sep 26 00:13:51 2026 +0330
+
+    feat:add a text below
+
+[33mcommit 246255af1f910c2fd025cb63ced311cf35363db3[m
+Merge: 41b8294 6469247
+Author: vahidyazdani <v.yazdani79@gmail.com>
+Date:   Sat Sep 26 00:12:52 2026 +0330
+
+    Merge pull request #5 from jsunique/section
+    
+    Section
+
+[33mcommit 6469247cd586db988a7270a7a5286c4247d2c3f3[m
+Author: pythonunique <v.yazdani79@gmail.com>
+Date:   Fri Sep 25 23:33:49 2026 +0330
+
+    feat:add a focus to globe
+
+[33mcommit 88d2ee0c2c2fea19b03d0ff3c130c71cd10cf8de[m
+Author: pythonunique <v.yazdani79@gmail.com>
+Date:   Fri Sep 25 19:32:14 2026 +0330
+
+    feat:make globe completely designed
+
+[33mcommit 3f2d8bb2647cfd0e650dde61d8883db19e60ad74[m
+Author: pythonunique <v.yazdani79@gmail.com>
+Date:   Fri Sep 25 18:14:50 2026 +0330
+
+    feat: text of hero
+
+[33mcommit 41b8294c2f9b3c9bafacf6ebc9769a215939204f[m
+Merge: 103bf4d 2e420b8
+Author: vahidyazdani <v.yazdani79@gmail.com>
+Date:   Fri Sep 25 17:47:14 2026 +0330
+
+    Merge pull request #4 from jsunique/navbar
+    
+    feat:a responsive navbar
+
+[33mcommit 2e420b885e5f10476ecb0f169d70c0b649b5321d[m[33m ([m[1;31morigin/navbar[m[33m)[m
+Author: pythonunique <v.yazdani79@gmail.com>
+Date:   Fri Sep 25 17:33:50 2026 +0330
+
+    feat:a responsive navbar
+
+[33mcommit 103bf4dbb3288c849a346d31de2aaf3bce0ab5ff[m
+Merge: 8a1f55b 9eff6d2
+Author: vahidyazdani <v.yazdani79@gmail.com>
+Date:   Fri Sep 25 15:39:26 2026 +0330
+
+    Merge pull request #2 from jsunique/themcolor
+    
+    feat:add a css style to my project
+
+[33mcommit 9eff6d2254a4ee0505ea29e4a49045c9395a6c2d[m[33m ([m[1;31morigin/themcolor[m[33m)[m
+Author: pythonunique <v.yazdani79@gmail.com>
+Date:   Fri Sep 25 15:36:13 2026 +0330
+
+    feat:add a css style to my project
+
+[33mcommit 8a1f55b6f549acce6ca5e0bc9e25aa91862d10e9[m
+Merge: 5883647 09e2908
+Author: vahidyazdani <v.yazdani79@gmail.com>
+Date:   Wed Sep 23 13:12:05 2026 +0330
+
+    Merge pull request #1 from jsunique/daisy-ui
+    
+    feat:add daisy ui
+
+[33mcommit 09e29083f1fe18660d1b76ed74bfe478d49ca699[m[33m ([m[1;31morigin/daisy-ui[m[33m)[m
+Author: pythonunique <v.yazdani79@gmail.com>
+Date:   Wed Sep 23 13:10:32 2026 +0330
+
+    feat:add daisy ui
+
+[33mcommit 5883647eb80304e529d0a97b0a69493a42318449[m[33m ([m[1;31morigin/master[m[33m, [m[1;32mmaster[m[33m)[m
+Author: pythonunique <v.yazdani79@gmail.com>
+Date:   Wed Sep 23 12:55:24 2026 +0330
+
+    first commit
+
+[33mcommit 3e7a02b295b56c174a15a55a47d1be1bdd0defb4[m
+Author: pythonunique <v.yazdani79@gmail.com>
+Date:   Sun Sep 20 15:10:31 2026 +0330
+
+    first commit
