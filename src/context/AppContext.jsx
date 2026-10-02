@@ -237,6 +237,31 @@ if (action.type === "REMOVE_EXPENSE") {
       users: { ...state.users, [userId]: user },
     };
   }
+  if (action.type === "SET_TRIP_BUDGET") {
+  const userId = state.currentUserId;
+  const currentUser = state.users[userId];
+  const { countryName, budget } = action.payload;
+  const trip = currentUser?.trips?.[countryName];
+
+  if (!trip || !Number.isFinite(budget) || budget < 0) return state;
+
+  return {
+    ...state,
+    users: {
+      ...state.users,
+      [userId]: {
+        ...currentUser,
+        trips: {
+          ...currentUser.trips,
+          [countryName]: {
+            ...trip,
+            budget,
+          },
+        },
+      },
+    },
+  };
+}
 
   if (action.type === "LOGOUT") {
     return { ...state, currentUserId: null };
