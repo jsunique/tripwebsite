@@ -11,6 +11,7 @@ export default function Profile() {
   const [activeTab , setActiveTab] = useState("favorites");
   const favorites = currentUser?.likes ?? [];
   const trips = Object.keys(currentUser?.trips ?? {});
+  
   return (
     <>
     <div className='w-[70%] h-10 bg-base-300 mx-auto mt-5 rounded-3xl flex max-w-60'>
@@ -71,7 +72,7 @@ export default function Profile() {
             <div className='min-w-0 w-full bg-base-200 rounded-3xl p-3 flex flex-col'>
               <img src={countryData.image} className='w-full h-44 sm:h-48 object-cover  rounded-2xl' />
               <p className=' text-primary px-5 font-semibold text-xl'>{countryName}</p>
-              <button className='hover:bg-primary bg-primary/80 cursor-pointer   mt-2 h-10 mx-auto text-primary-content  max-w-70 w-[50%] rounded-4xl '>Manage Travel</button>
+              <button onClick={()=>navigate(`/trip/${countryName}`)} className='hover:bg-primary bg-primary/80 cursor-pointer   mt-2 h-10 mx-auto text-primary-content  max-w-70 w-[50%] rounded-4xl '>Manage Travel</button>
               <button onClick={()=>dispatch({type:"TOGGLE_TRIP_COUNTRY",payload:countryName})} className='hover:bg-red-400 hover:text-amber-100 cursor-pointer border-accent mt-2 h-8 mx-auto text-red-400 font-semibold max-w-70 w-[50%] rounded-4xl '>Remove from list</button>
             </div>
                 )

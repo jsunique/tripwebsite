@@ -59,6 +59,172 @@ function appReducer(state, action) {
       },
     };
   }
+  if (action.type === "ADD_COMPANION") {
+  const userId = state.currentUserId;
+  const currentUser = state.users[userId];
+  const { countryName, companionName } = action.payload;
+
+  const trip = currentUser?.trips?.[countryName];
+  const name = companionName.trim();
+
+  if (!trip || !name) return state;
+
+  return {
+    ...state,
+    users: {
+      ...state.users,
+      [userId]: {
+        ...currentUser,
+        trips: {
+          ...currentUser.trips,
+          [countryName]: {
+            ...trip,
+            companions: [...trip.companions, name],
+          },
+        },
+      },
+    },
+  };
+}
+if (action.type === "ADD_ACTIVITY") {
+  const userId = state.currentUserId;
+  const currentUser = state.users[userId];
+  const { countryName, activityName } = action.payload;
+  const trip = currentUser?.trips?.[countryName];
+  const name = activityName.trim();
+
+  if (!trip || !name) return state;
+
+  return {
+    ...state,
+    users: {
+      ...state.users,
+      [userId]: {
+        ...currentUser,
+        trips: {
+          ...currentUser.trips,
+          [countryName]: {
+            ...trip,
+            activities: [...trip.activities, name],
+          },
+        },
+      },
+    },
+  };
+}
+if (action.type === "REMOVE_ACTIVITY") {
+  const userId = state.currentUserId;
+  const currentUser = state.users[userId];
+  const { countryName, index } = action.payload;
+  const trip = currentUser?.trips?.[countryName];
+
+  if (!trip || index < 0 || index >= trip.activities.length) {
+    return state;
+  }
+
+  return {
+    ...state,
+    users: {
+      ...state.users,
+      [userId]: {
+        ...currentUser,
+        trips: {
+          ...currentUser.trips,
+          [countryName]: {
+            ...trip,
+            activities: trip.activities.filter((_, i) => i !== index),
+          },
+        },
+      },
+    },
+  };
+}
+if (action.type === "REMOVE_COMPANION") {
+  const userId = state.currentUserId;
+  const currentUser = state.users[userId];
+  const { countryName, index } = action.payload;
+  const trip = currentUser?.trips?.[countryName];
+
+  if (!trip || index < 0 || index >= trip.companions.length) {
+    return state;
+  }
+
+  return {
+    ...state,
+    users: {
+      ...state.users,
+      [userId]: {
+        ...currentUser,
+        trips: {
+          ...currentUser.trips,
+          [countryName]: {
+            ...trip,
+            companions: trip.companions.filter((_, i) => i !== index),
+          },
+        },
+      },
+    },
+  };
+}
+if (action.type === "ADD_EXPENSE") {
+  const userId = state.currentUserId;
+  const currentUser = state.users[userId];
+  const { countryName, title, amount } = action.payload;
+  const trip = currentUser?.trips?.[countryName];
+
+  if (!trip) return state;
+
+  const expense = {
+    id: crypto.randomUUID(),
+    title,
+    amount,
+  };
+
+  return {
+    ...state,
+    users: {
+      ...state.users,
+      [userId]: {
+        ...currentUser,
+        trips: {
+          ...currentUser.trips,
+          [countryName]: {
+            ...trip,
+            expenses: [...trip.expenses, expense],
+          },
+        },
+      },
+    },
+  };
+}
+
+if (action.type === "REMOVE_EXPENSE") {
+  const userId = state.currentUserId;
+  const currentUser = state.users[userId];
+  const { countryName, expenseId } = action.payload;
+  const trip = currentUser?.trips?.[countryName];
+
+  if (!trip) return state;
+
+  return {
+    ...state,
+    users: {
+      ...state.users,
+      [userId]: {
+        ...currentUser,
+        trips: {
+          ...currentUser.trips,
+          [countryName]: {
+            ...trip,
+            expenses: trip.expenses.filter(
+              (expense) => expense.id !== expenseId
+            ),
+          },
+        },
+      },
+    },
+  };
+}
 
   if (action.type === "LOGIN") {
     const userId = action.payload.trim().toLowerCase();
@@ -71,6 +237,31 @@ function appReducer(state, action) {
       users: { ...state.users, [userId]: user },
     };
   }
+  if (action.type === "SET_TRIP_BUDGET") {
+  const userId = state.currentUserId;
+  const currentUser = state.users[userId];
+  const { countryName, budget } = action.payload;
+  const trip = currentUser?.trips?.[countryName];
+
+  if (!trip || !Number.isFinite(budget) || budget < 0) return state;
+
+  return {
+    ...state,
+    users: {
+      ...state.users,
+      [userId]: {
+        ...currentUser,
+        trips: {
+          ...currentUser.trips,
+          [countryName]: {
+            ...trip,
+            budget,
+          },
+        },
+      },
+    },
+  };
+}
 
   if (action.type === "LOGOUT") {
     return { ...state, currentUserId: null };
