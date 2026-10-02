@@ -7,6 +7,7 @@ export default function TripDetail() {
   const {state , dispatch} = useContext(AppContext);
   const currentUser = state.users[state.currentUserId];
   const [showingInput , setShowingInput] = useState(false);
+  const [inputC , setInputC] = useState("");
   const trip = currentUser?.trips?.[countryName];
   console.log("trip:" , trip);
   console.log(currentUser);
@@ -46,7 +47,7 @@ export default function TripDetail() {
 {
   showingInput && (
         <div className='flex flex-col items-center px-3 gap-5 pb-5 mt-5'>
-          <input type="text" placeholder='who you want to go with?' className='w-[90%] px-3 outline-none border border-base-content rounded-2xl h-10 max-w-70' />
+          <input type="text" placeholder='who you want to go with?' className='w-[90%] px-3 outline-none border border-base-content rounded-2xl h-10 max-w-70' value={inputC} onChange={(e)=>setInputC(e.target.value)} />
         <div className='flex justify-evenly'>
           <button className='btn btn-primary max-w-20 w-[40%] h-10'>accept</button>
           <button onClick={()=>setShowingInput(false)} className='btn bg-red-400 text-primary-content max-w-20 w-[40%] h-10'>cancel</button>

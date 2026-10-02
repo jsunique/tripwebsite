@@ -59,6 +59,33 @@ function appReducer(state, action) {
       },
     };
   }
+  if (action.type === "ADD_COMPANION") {
+  const userId = state.currentUserId;
+  const currentUser = state.users[userId];
+  const { countryName, companionName } = action.payload;
+
+  const trip = currentUser?.trips?.[countryName];
+  const name = companionName.trim();
+
+  if (!trip || !name) return state;
+
+  return {
+    ...state,
+    users: {
+      ...state.users,
+      [userId]: {
+        ...currentUser,
+        trips: {
+          ...currentUser.trips,
+          [countryName]: {
+            ...trip,
+            companions: [...trip.companions, name],
+          },
+        },
+      },
+    },
+  };
+}
 
   if (action.type === "LOGIN") {
     const userId = action.payload.trim().toLowerCase();
