@@ -52,9 +52,9 @@ export default function TripDetail() {
         {
           trip.companions.map((name , index)=>(
             <>
-            <div className='flex justify-between sm:justify-evenly px-5 pb-3 mt-5 items-center'>
+            <div key={`${index}-${name}`} className='flex justify-between sm:justify-evenly px-5 pb-3 mt-5 items-center'>
               <p>{name}</p>
-              <button className='btn bg-red-400 text-primary-content max-w-20 w-[30%] h-8'>remove</button>
+              <button onClick={()=> dispatch({type:"REMOVE_COMPANION",payload:{countryName,index}})} className='btn bg-red-400 text-primary-content max-w-20 w-[30%] h-8'>remove</button>
             </div>
             <div className='w-[80%] h-px bg-primary mx-auto'></div>
             </>
