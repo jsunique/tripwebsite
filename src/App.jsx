@@ -7,6 +7,7 @@ import CountryDetail from "./components/CountryDetail"
 import { Routes , Route } from "react-router"
 import Profile from "./components/Profile"
 import Login from "./components/Login"
+import TripDetail from "./components/TripDetail"
 
 
 function App() {
@@ -22,6 +23,7 @@ function App() {
       <Route path="/country/:countryName" element={<CountryDetail />} />
       <Route path="/profile" element={<Profile />} />
       <Route path="/login" element={<Login />} />
+      <Route path="/trip/:countryName" element={<TripDetail />} />
     </Routes>
     </div>
   )
