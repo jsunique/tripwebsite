@@ -2,8 +2,10 @@ import React, { useState } from 'react'
 import { useContext } from 'react'
 import { AppContext } from '../context/AppContext'
 import countries from '../data/countries.json'
+import {useNavigate} from 'react-router' 
 
 export default function Profile() {
+  const navigate = useNavigate();
   const {state , dispatch } = useContext(AppContext);
   const currentUser = state.users[state.currentUserId];
   const [activeTab , setActiveTab] = useState("favorites");
@@ -17,9 +19,18 @@ export default function Profile() {
     </div>
         {
           activeTab === 'favorites' ?
-          <div className='grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 max-w-5xl mx-auto px-4 mt-6'>
-            {
-              favorites.map((countryName) =>{
+          <div className='grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 max-w-5xl mx-auto px-4 mt-6 bg-base-100'>
+            {              
+            favorites.length === 0 ? (
+                <div className=' w-full translate-x-1/2  h-60 flex flex-col mx-auto justify-center items-center'>
+                  <p className='font-header text-center '>you must add some favorites from countries list<br />
+                  there is nothing to show you :(</p>
+                  <button onClick={()=>navigate('/')} className='text-primary-content p-3 font-pop cursor-pointer mt-5 rounded-4xl bg-primary '>Go Home</button>
+
+                </div>
+              )
+              
+              :favorites.map((countryName) =>{
                 const countryData = countries.find(
                   (item) => item.name === countryName
                 );
@@ -39,14 +50,22 @@ export default function Profile() {
 
           </div>
             :
-        <div className='grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 max-w-5xl mx-auto px-4 mt-6'>
+        <div className='grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 max-w-5xl mx-auto px-4 mt-6 bg-base-100'>
             {
-              trips.map((countryName) =>{
+              trips.length === 0 ? (
+                <div className=' w-full translate-x-1/2  h-60 flex flex-col mx-auto justify-center items-center'>
+                  <p className='font-header text-center '>you must add some trip from countries list<br />
+                  there is nothing to show you :(</p>
+                  <button onClick={()=>navigate('/')} className='text-primary-content p-3 font-pop cursor-pointer mt-5 rounded-4xl bg-primary '>Go Home</button>
+
+                </div>
+              )
+              :(trips.map((countryName) =>{
                 const countryData = countries.find(
                   (item) => item.name === countryName
                 );
-                if(!countryData){
-                  return null
+                if((!countryData) || trips =={}){
+                  return null;
                 }
                 return(
             <div className='min-w-0 w-full bg-base-200 rounded-3xl p-3 flex flex-col'>
@@ -56,7 +75,7 @@ export default function Profile() {
               <button className='hover:bg-red-400 hover:text-amber-100 cursor-pointer border-accent mt-2 h-8 mx-auto text-red-400 font-semibold max-w-70 w-[50%] rounded-4xl '>Remove from list</button>
             </div>
                 )
-              })
+              }))
             }
 
           </div>
